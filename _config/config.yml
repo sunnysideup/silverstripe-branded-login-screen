@@ -1,1 +1,14 @@
-# see https://docs.silverstripe.org/en/developer_guides/configuration/configuration/
+---
+Name: admin-branding
+Before:
+  - '#login-forms'
+---
+SilverStripe\LoginForms\EnablerExtension:
+  login_themes:
+    # insert before themes in vendor/silverstripe/login-forms/_config/theme.yml
+    - 'sunnysideup/branded-login-screen:login-forms'
+
+
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    - Sunnysideup\BrandedLoginScreen\SiteConfigExtension

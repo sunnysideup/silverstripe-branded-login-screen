@@ -1,0 +1,1 @@
+Customization is done in the Login Screen Settings tab of the Site Config settings.
