@@ -9,6 +9,47 @@
     <% if $SiteConfig.LoginScreenButtonTextColor %>--color-button-primary-text: #$SiteConfig.LoginScreenButtonTextColor;<% end_if %>
     <% if $SiteConfig.LoginScreenButtonTextHoverColor %>--color-button-primary-hover-text: #$SiteConfig.LoginScreenButtonTextHoverColor;<% end_if %>
 }
+
+main.login-form
+    ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-start;
+        margin-bottom: 2rem;
+        border-bottom: 2px solid var(--color-button-primary-background);
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        padding-bottom: 1px;
+    }
+
+    ul li {
+        text-align: center;
+    }
+
+    ul li a {
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        display: inline-block;
+        width: 100%;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        background: #ccc;
+        color: #555;
+    }
+
+    ul li a:hover {
+        background: var(--color-button-primary-hover-background);
+        text-decoration: none;
+        color: var(--color-button-primary-hover-text);
+    }
+    ul li a.active {
+        background: var(--color-button-primary-background);
+        color: var(--color-button-primary-text);
+    }
+}
 </style>
 
 <p>
