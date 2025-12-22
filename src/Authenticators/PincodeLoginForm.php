@@ -42,15 +42,29 @@ class PincodeLoginForm extends LoginForm
 
     protected function getFormFields(): FieldList
     {
-        return FieldList::create([
-            TextField::create('Email', 'Email Address'),
-        ]);
+        if ($this->getRequest()->getSession()->get('PincodeSent')) {
+            return FieldList::create([
+                TextField::create('Pincode', 'Pincode')
+            ]);
+        }
+        else {
+            return FieldList::create([
+                TextField::create('Email', 'Email Address')
+            ]);
+        }
     }
 
     protected function getFormActions(): FieldList
     {
-        return FieldList::create(
-            FormAction::create('doSendPincode', 'Send Pincode')
-        );
+        if ($this->getRequest()->getSession()->get('PincodeSent')) {
+            return FieldList::create(
+                FormAction::create('doPincodeLogin', 'Log In')
+            );
+        }
+        else {
+            return FieldList::create(
+                FormAction::create('doSendPincode', 'Send Pincode')
+            );
+        }
     }
 }

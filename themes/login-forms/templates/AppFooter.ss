@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (tabWithMessage) {
     showTab(tabWithMessage.id, true); // do the swap once
   } else {
-    showTab(formTabs[1]?.id || formTabs[0]?.id, true); // do the swap once
+    showTab(formTabs[0]?.id || formTabs[1]?.id, true); // do the swap once
   }
 });
 

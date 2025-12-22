@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Sunnysideup\BrandedLoginScreen\Authenticators;
 
+use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
 
 class MemberExtension extends DataExtension
@@ -22,5 +23,11 @@ class MemberExtension extends DataExtension
         $this->owner->Pincode = $pincode;
         $this->owner->PincodeExpiry = date('Y-m-d H:i:s', time() + ($expiryMinutes * 60));
         $this->owner->write();
+    }
+
+    public function updateCMSFields(FieldList $fields): void
+    {
+        $fields->removeByName('Pincode');
+        $fields->removeByName('PincodeExpiry');
     }
 }

@@ -11,21 +11,50 @@ use SilverStripe\Core\Injector\Injector;
 use SilverStripe\MFA\Authenticator\LoginHandler;
 use SilverStripe\ORM\ValidationResult;
 use SilverStripe\Security\Member;
-use SilverStripe\Security\MemberAuthenticator\MemberAuthenticator;
+use SilverStripe\Security\MemberAuthenticator\LogoutHandler;
+use SilverStripe\Security\Security;
 
 class PincodeLoginHandler extends LoginHandler
 {
-    public const SECURITY_TOKEN = 'security_token';
-
     private static $allowed_actions = [
         'LoginForm',
-        'pincode'
     ];
 
-    public function pincode(HTTPRequest $request): HTTPResponse
+    public function doPincodeLogin($data, PincodeLoginForm $form, HTTPRequest $request): HTTPResponse
     {
-        // Handle pincode submission logic here
-        return new HTTPResponse('Pincode submitted');
+        $email = $request->getSession()->get('PincodeEmail');
+
+        $request->getSession()->clear('PincodeSent');
+        $request->getSession()->clear('PincodeEmail');
+
+        if (!$email) {
+            $form->sessionMessage('Session expired.', ValidationResult::TYPE_ERROR);
+            return $form->getRequestHandler()->redirectBackToForm();
+        }
+
+        $data['Email'] = $email;
+
+        /** @var PincodeAuthenticator $authenticator */
+        $authenticator = Injector::inst()->create(PincodeAuthenticator::class);
+        $member = $authenticator->authenticate($data, $request, $result);
+        
+        if ($member) {
+            if ($result->isValid()) {
+                // Absolute redirection URLs may cause spoofing
+                $backURL = $this->getBackURL() ?: '/';
+
+                // If a default login dest has been set, redirect to that.
+                $backURL = Security::config()->get('default_login_dest') ?: $backURL;
+
+                return $this->redirect($backURL);
+            }
+            Injector::inst()->get(LogoutHandler::class)->doLogOut($member);
+        }
+        else {
+            $form->sessionMessage('Matching member not found.', ValidationResult::TYPE_ERROR);
+        }
+
+        return $form->getRequestHandler()->redirectBackToForm();
     }
     
     public function doSendPincode($data, PincodeLoginForm $form, HTTPRequest $request): HTTPResponse
@@ -35,12 +64,28 @@ class PincodeLoginHandler extends LoginHandler
             ->filter([$identifierField => $data['Email'] ?? false])
             ->first();
 
-        if (!$member) {
-            // use a dummy member - don't reveal which emails are registered by failing
-            $member = Member::create(['Email' => 'dummy@example.com']);
+        if ($member) {
+            $this->sendPincode($member);
+
+            $request->getSession()->set('PincodeSent', true);
+            $request->getSession()->set('PincodeEmail', $data['Email'] ?? '');
         }
 
+        $form->sessionMessage('If you entered a registered email address, you will receive a pincode shortly.', ValidationResult::TYPE_GOOD);
+
+        return $form->getRequestHandler()->redirectBackToForm();
+    }
+
+    public function loginForm(): PincodeLoginForm
+    {
+        return PincodeLoginForm::create($this, get_class($this->authenticator), 'LoginForm');
+    }
+
+    public function sendPincode(Member $member): void
+    {
         $member->generatePincode();
+
+        // If SMS sending is implemented, it would go here as an alternative to email.
 
         $email = Email::create()
             ->setHTMLTemplate('Sunnysideup\\BrandedLoginScreen\\Email\\PincodeLoginEmail')
@@ -50,18 +95,5 @@ class PincodeLoginHandler extends LoginHandler
         if ($member->isInDB()) {
             $email->send();
         }
-
-        $form->sessionMessage('A pincode has been sent to your email address.', ValidationResult::TYPE_GOOD);
-
-        // Duplication to show the message on the default handler as well.
-        $copy = Injector::inst()->create(MemberAuthenticator::class)->getLoginHandler('')->loginForm();
-        $copy->sessionMessage('A pincode has been sent to your email address.', ValidationResult::TYPE_GOOD);
-
-        return $form->getRequestHandler()->redirectBackToForm();
-    }
-
-    public function loginForm(): PincodeLoginForm
-    {
-        return PincodeLoginForm::create($this, get_class($this->authenticator), 'LoginForm');
     }
 }
