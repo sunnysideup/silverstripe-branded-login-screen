@@ -20,9 +20,3 @@ SilverStripe\Security\Member:
 SilverStripe\CMS\Controllers\ContentController:
   extensions:
     - Sunnysideup\BrandedLoginScreen\Authenticators\ControllerExtension
-
-SilverStripe\Core\Injector\Injector:
-  SilverStripe\Security\Security:
-    properties:
-      Authenticators:
-        pincode: '%$Sunnysideup\BrandedLoginScreen\Authenticators\PincodeAuthenticator'
