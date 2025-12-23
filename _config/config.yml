@@ -12,11 +12,3 @@ SilverStripe\LoginForms\EnablerExtension:
 SilverStripe\SiteConfig\SiteConfig:
   extensions:
     - Sunnysideup\BrandedLoginScreen\SiteConfigExtension
-
-SilverStripe\Security\Member:
-  extensions:
-    - Sunnysideup\BrandedLoginScreen\Authenticators\MemberExtension
-
-SilverStripe\CMS\Controllers\ContentController:
-  extensions:
-    - Sunnysideup\BrandedLoginScreen\Authenticators\ControllerExtension
