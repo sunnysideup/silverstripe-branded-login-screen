@@ -13,14 +13,14 @@ use TractorCow\Colorpicker\Forms\ColorField;
 class SiteConfigExtension extends Extension
 {
     private static array $db = [
-        'LoginScreenBackgroundColor' => 'Varchar(7)',
-        'LoginScreenBoxColor' => 'Varchar(7)',
-        'LoginScreenTextColor' => 'Varchar(7)',
-        'LoginScreenLinkColor' => 'Varchar(7)',
-        'LoginScreenButtonColor' => 'Varchar(7)',
-        'LoginScreenButtonHoverColor' => 'Varchar(7)',
-        'LoginScreenButtonTextColor' => 'Varchar(7)',
-        'LoginScreenButtonTextHoverColor' => 'Varchar(7)',
+        'LoginScreenBackgroundColor' => 'Varchar(8)',
+        'LoginScreenBoxColor' => 'Varchar(8)',
+        'LoginScreenTextColor' => 'Varchar(8)',
+        'LoginScreenLinkColor' => 'Varchar(8)',
+        'LoginScreenButtonColor' => 'Varchar(8)',
+        'LoginScreenButtonHoverColor' => 'Varchar(8)',
+        'LoginScreenButtonTextColor' => 'Varchar(8)',
+        'LoginScreenButtonTextHoverColor' => 'Varchar(8)',
         'LoginFooterContent' => 'HTMLText',
     ];
 

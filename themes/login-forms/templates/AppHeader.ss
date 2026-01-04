@@ -17,7 +17,7 @@ body {
 }
 
 main.login-form {
-    max-width: 550px;
+    max-width: 670px;
     .message {
         background: #fff;
         padding: 1rem;
