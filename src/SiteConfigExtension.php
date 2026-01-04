@@ -7,10 +7,10 @@ use SilverStripe\Assets\Image;
 use SilverStripe\Forms\FieldGroup;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Extension;
 use TractorCow\Colorpicker\Forms\ColorField;
 
-class SiteConfigExtension extends DataExtension
+class SiteConfigExtension extends Extension
 {
     private static array $db = [
         'LoginScreenBackgroundColor' => 'Varchar(7)',
@@ -42,6 +42,7 @@ class SiteConfigExtension extends DataExtension
     public function updateCMSFields(FieldList $fields)
     {
         $fields->findOrMakeTab('Root.LoginScreen', 'Login Screen Settings');
+        $defaults = $this->getOwner()->config()->get('defaults');
         $fields->addFieldsToTab(
             'Root.LoginScreen',
             [
@@ -50,14 +51,28 @@ class SiteConfigExtension extends DataExtension
                     ->setAllowedMaxFileNumber(1),
                 FieldGroup::create(
                     'Login Screen Colors',
-                    ColorField::create('LoginScreenBackgroundColor', 'Background Color'),
-                    ColorField::create('LoginScreenBoxColor', 'Box Color'),
-                    ColorField::create('LoginScreenTextColor', 'Text Color'),
-                    ColorField::create('LoginScreenLinkColor', 'Link Color'),
-                    ColorField::create('LoginScreenButtonColor', 'Button Color'),
-                    ColorField::create('LoginScreenButtonTextColor', 'Button Text Color'),
-                    ColorField::create('LoginScreenButtonHoverColor', 'Hover Button Text Color'),
-                    ColorField::create('LoginScreenButtonTextHoverColor', 'Hover Button Text Color'),
+                    ColorField::create('LoginScreenBackgroundColor', 'Background Color')
+                        ->setDescription('Default: #' . $defaults['LoginScreenBackgroundColor']),
+                ),
+                FieldGroup::create(
+                    'Login Screen Colors2',
+                    ColorField::create('LoginScreenBoxColor', 'Box Color')
+                        ->setDescription('Default: #' . $defaults['LoginScreenBoxColor']),
+                    ColorField::create('LoginScreenTextColor', 'Text Color')
+                        ->setDescription('Default: #' . $defaults['LoginScreenTextColor']),
+                    ColorField::create('LoginScreenLinkColor', 'Link Color')
+                        ->setDescription('Default: #' . $defaults['LoginScreenLinkColor']),
+                ),
+                FieldGroup::create(
+                    'Login Screen Colors3',
+                    ColorField::create('LoginScreenButtonColor', 'Button Color')
+                        ->setDescription('Default: #' . $defaults['LoginScreenButtonColor']),
+                    ColorField::create('LoginScreenButtonTextColor', 'Button Text Color')
+                        ->setDescription('Default: #' . $defaults['LoginScreenButtonTextColor']),
+                    ColorField::create('LoginScreenButtonHoverColor', 'Hover Button Color')
+                        ->setDescription('Default: #' . $defaults['LoginScreenButtonHoverColor']),
+                    ColorField::create('LoginScreenButtonTextHoverColor', 'Hover Button Text Color')
+                        ->setDescription('Default: #' . $defaults['LoginScreenButtonTextHoverColor']),
                 ),
                 HTMLEditorField::create(
                     'LoginFooterContent',
