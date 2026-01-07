@@ -39,6 +39,10 @@ class SiteConfigExtension extends Extension
         'LoginScreenButtonTextHoverColor' => 'FFFFFF',
     ];
 
+    private static $owns = [
+        'LoginScreenLogo',
+    ];
+
     public function updateCMSFields(FieldList $fields)
     {
         $fields->findOrMakeTab('Root.LoginScreen', 'Login Screen Settings');
