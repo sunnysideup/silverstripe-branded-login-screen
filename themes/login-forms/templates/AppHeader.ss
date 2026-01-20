@@ -22,10 +22,8 @@ main.login-form {
     width: 550px;
     max-width: 100%;
     .message {
-        background: #fff;
-        padding: 1rem;
+        padding: 1rem 0;
         margin-bottom: 1rem;
-        max-width: 100%;
         font-weight: bold;
     }
     h1, h2 {
@@ -79,7 +77,15 @@ main.login-form {
             display: none;
         }
     }
+    p {
+        max-width: var(--sizing-content-width);
+        margin-left: auto;
+        margin-right: auto;
+    }
     form {
+        max-width: var(--sizing-content-width);
+        margin-left: auto;
+        margin-right: auto;
         .field {
             .description {
                 color: var(--color-form-text);
@@ -88,6 +94,11 @@ main.login-form {
         label {
             color: var(--color-form-text);
         }
+    }
+    .login-form__content,
+    form {
+        margin-left: auto;
+        margin-right: auto;
     }
 
 }
