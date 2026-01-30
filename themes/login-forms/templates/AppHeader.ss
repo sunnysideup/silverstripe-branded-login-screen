@@ -103,6 +103,11 @@ main.login-form {
     }
 
 }
+@media (width >= 756px) {
+    main.login-form {
+    width: 700px;
+    }
+}
 </style>
 
 <p>
