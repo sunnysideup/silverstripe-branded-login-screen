@@ -21,6 +21,8 @@ body {
 main.login-form {
     width: 550px;
     max-width: 100%;
+    * {
+    }
     .message {
         padding: 1rem 0;
         margin-bottom: 1rem;
@@ -28,7 +30,7 @@ main.login-form {
         color: #000;
     }
     h1, h2 {
-        color: var(--color-form-text);
+        color: var(--color-form-text)!important;
         padding-bottom: 1rem;
         text-align: center;
         width: 100%;
@@ -103,11 +105,17 @@ main.login-form {
     }
 
 }
+
+.dark-mode-enabled main.login-form * {
+    color: var(--color-form-text)!important;
+}
+
 @media (width >= 756px) {
     main.login-form {
-    width: 700px;
+        width: 700px;
     }
 }
+
 
 </style>
 

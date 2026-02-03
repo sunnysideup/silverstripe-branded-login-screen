@@ -7,6 +7,9 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const tabList = document.querySelector('.login-form > ul');
+  if(! tabList) {
+    return;
+  }
   const formTabs = document.querySelectorAll('.form-tab');
   const tabLinks = tabList.querySelectorAll('li a');
 
