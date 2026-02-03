@@ -18,11 +18,16 @@ body {
     padding-top: 10vh;
 }
 
+.dark-mode-enabled main.login-form * {
+    color: var(--color-form-text);
+}
+.dark-mode-enabled main.login-form input {
+    color: #fff;
+    background: #333;
+}
 main.login-form {
     width: 550px;
     max-width: 100%;
-    * {
-    }
     .message {
         padding: 1rem 0;
         margin-bottom: 1rem;
@@ -103,12 +108,41 @@ main.login-form {
         margin-left: auto;
         margin-right: auto;
     }
-
+    button,
+    input[type=submit] {
+        background: var(--color-button-primary-background)!important;
+        color: var(--color-button-primary-text)!important;
+    }
+    button:hover,
+    input[type=submit]:hover {
+        background: var(--color-button-primary-hover-background)!important;
+        text-decoration: none!important;
+        color: var(--color-button-primary-hover-text)!important;
+    }
+    .btn-secondary {
+        background: transparent!important;
+        color: var(--color-button-primary-background)!important;
+        opacity: 0.7!important;
+    }
+    .btn-secondary:hover {
+        opacity: 1!important;
+    }
+    .mfa-feature-list-item__description {
+        margin-left: 0;
+    }
+    .mfa-register-backup-codes__container {
+        p {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+    .mfa-register-backup-codes__container {
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
-.dark-mode-enabled main.login-form * {
-    color: var(--color-form-text)!important;
-}
 
 @media (width >= 756px) {
     main.login-form {
