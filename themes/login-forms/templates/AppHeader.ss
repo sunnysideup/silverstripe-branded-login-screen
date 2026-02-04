@@ -154,10 +154,12 @@ main.login-form {
 </style>
 
 <p>
-    <% if $SiteConfig.LoginScreenLogo %>
     <a href="/">
+    <% if $SiteConfig.LoginScreenLogo %>
         <img src="$SiteConfig.LoginScreenLogo.URL" alt="Logo" width="240">
-    </a>
+    <% else %>
+        <h1>$SiteConfig.Title</h1>
     <% end_if %>
+    </a>
 </p>
 
