@@ -4,10 +4,10 @@ namespace Sunnysideup\BrandedLoginScreen;
 
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
+use SilverStripe\Core\Extension;
 use SilverStripe\Forms\FieldGroup;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
-use SilverStripe\Core\Extension;
 use TractorCow\Colorpicker\Forms\ColorField;
 
 class SiteConfigExtension extends Extension
