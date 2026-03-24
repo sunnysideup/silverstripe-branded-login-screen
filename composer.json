@@ -16,7 +16,7 @@
     "require": {
         "silverstripe/framework": "^5.0",
         "silverstripe/admin": "^2.0",
-        "tractorcow/silverstripe-colorpicker": "^4"
+        "tractorcow/silverstripe-colorpicker": "^4.2"
     },
     "require-dev": {
         "sunnysideup/sswebpack_engine_only": "dev-master",
