@@ -14,8 +14,14 @@
 }
 
 body {
-    justify-content: flex-start!important;
+    display: flex;
+    justify-content: flex-start;
     padding-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
 }
 
 .dark-mode-enabled main.login-form * {
