@@ -38,7 +38,7 @@ main.login-form {
         padding: 1rem 0;
         margin-bottom: 1rem;
         font-weight: bold;
-        color: #000;
+        color: var(--color-form-text);
     }
     h1, h2 {
         color: var(--color-form-text)!important;
