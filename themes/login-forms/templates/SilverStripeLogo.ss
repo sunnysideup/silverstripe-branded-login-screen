@@ -90,3 +90,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 </script>
+<a href="$SiteConfig.BaseURL" class="logo-link">&laquo; return to home page</a>

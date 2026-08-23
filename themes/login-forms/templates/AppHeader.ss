@@ -23,13 +23,14 @@ body {
     flex-wrap: nowrap;
     align-items: center;
 }
+.input.text {
+    background: #fff!important;
+    color: #333!important;
+}
+
 
 .dark-mode-enabled main.login-form * {
     color: var(--color-form-text);
-}
-.dark-mode-enabled main.login-form input {
-    color: #fff;
-    background: #333;
 }
 main.login-form {
     width: 550px;
